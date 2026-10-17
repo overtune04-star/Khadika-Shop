@@ -4,6 +4,6 @@
  * Contoh: 0812-3456-7890 ditulis sebagai 6281234567890.
  */
 window.WARUNG_CONFIG = {
-  whatsappNumber: "085647203231",
-  headerLogo: ""
+  whatsappNumber: "6285647203231",
+  headerLogo: "./images/logo-khadika.png"
 };
