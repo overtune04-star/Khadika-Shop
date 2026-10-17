@@ -27,6 +27,7 @@
   });
   let activeCategory = "semua";
   let toastTimer;
+  let cartHistoryEntry = false;
 
   function formatPrice(amount) {
     return currency.format(amount).replace(/\u00a0/g, " ");
@@ -199,7 +200,16 @@
     return button;
   }
 
-  function openCart() {
+  function openCart(fromHistory = false) {
+    if (cartPanel.classList.contains("open")) return;
+
+    if (!fromHistory) {
+      const currentState = window.history.state && typeof window.history.state === "object"
+        ? window.history.state
+        : {};
+      window.history.pushState({ ...currentState, warungCartOpen: true }, "", window.location.href);
+    }
+    cartHistoryEntry = true;
     cartPanel.classList.add("open");
     cartShade.classList.add("open");
     cartPanel.setAttribute("aria-hidden", "false");
@@ -207,12 +217,18 @@
     document.querySelector("[data-close-cart]").focus();
   }
 
-  function closeCart() {
+  function closeCart(fromHistory = false) {
+    if (!cartPanel.classList.contains("open")) return;
+
     cartPanel.classList.remove("open");
     cartShade.classList.remove("open");
     cartPanel.setAttribute("aria-hidden", "true");
     cartPanel.inert = true;
     document.querySelector("[data-open-cart]").focus();
+
+    const shouldReturnInHistory = cartHistoryEntry;
+    cartHistoryEntry = false;
+    if (!fromHistory && shouldReturnInHistory) window.history.back();
   }
 
   function sendOrderToWhatsApp() {
@@ -266,7 +282,9 @@
   });
 
   searchInput.addEventListener("input", filterProducts);
-  document.querySelectorAll("[data-open-cart]").forEach(button => button.addEventListener("click", openCart));
+  document.querySelectorAll("[data-open-cart]").forEach(button => {
+    button.addEventListener("click", () => openCart());
+  });
   document.querySelector("[data-close-cart]").addEventListener("click", closeCart);
   cartShade.addEventListener("click", closeCart);
   checkoutButton.addEventListener("click", sendOrderToWhatsApp);
@@ -285,6 +303,11 @@
 
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && cartPanel.classList.contains("open")) closeCart();
+  });
+
+  window.addEventListener("popstate", () => {
+    if (window.history.state?.warungCartOpen) openCart(true);
+    else closeCart(true);
   });
 
   document.querySelector("[data-year]").textContent = new Date().getFullYear();
