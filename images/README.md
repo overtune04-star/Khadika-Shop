@@ -2,6 +2,8 @@
 
 Simpan foto produk di folder ini, misalnya `beras-ramos.webp` atau `sabun-mandi.jpg`.
 
+Logo toko juga bisa disimpan di sini, misalnya `logo-khadika.png`, lalu diaktifkan melalui pengaturan `headerLogo` di `shop-config.js`.
+
 Ukuran yang disarankan sekitar 1000 × 1000 piksel dengan format WebP atau JPG terkompresi. Di [products.js](../products.js), isi properti `image` dengan path relatif, contohnya:
 
 ```js

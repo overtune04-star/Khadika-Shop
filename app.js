@@ -15,7 +15,11 @@
   const toast = document.querySelector("[data-toast]");
 
   const shopName = document.title.split(" — ")[0];
-  const whatsappNumber = String(window.WARUNG_CONFIG?.whatsappNumber ?? "").replace(/\D/g, "");
+  const configuredNumber = String(window.WARUNG_CONFIG?.whatsappNumber ?? "").replace(/\D/g, "");
+  const whatsappNumber = configuredNumber.startsWith("0")
+    ? `62${configuredNumber.slice(1)}`
+    : configuredNumber;
+  const headerLogoPath = String(window.WARUNG_CONFIG?.headerLogo ?? "").trim();
   const currency = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
@@ -124,6 +128,22 @@
     toast.classList.add("show");
     window.clearTimeout(toastTimer);
     toastTimer = window.setTimeout(() => toast.classList.remove("show"), 1900);
+  }
+
+  function loadHeaderLogo() {
+    if (!headerLogoPath) return;
+
+    const logo = document.querySelector("[data-header-logo]");
+    const brandMark = document.querySelector("[data-header-brand] .brand-mark");
+    const brandName = document.querySelector("[data-header-brand] .brand-name");
+
+    logo.src = headerLogoPath;
+    logo.alt = shopName;
+    logo.addEventListener("load", () => {
+      logo.hidden = false;
+      brandMark.hidden = true;
+      brandName.hidden = true;
+    }, { once: true });
   }
 
   function renderCart() {
@@ -268,6 +288,7 @@
   });
 
   document.querySelector("[data-year]").textContent = new Date().getFullYear();
+  loadHeaderLogo();
   renderProducts();
   renderCart();
 })();

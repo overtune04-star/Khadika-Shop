@@ -30,3 +30,7 @@ Edit daftar di [products.js](./products.js). Setiap produk berisi nama, kategori
 ## Mengatur WhatsApp toko
 
 Buka [shop-config.js](./shop-config.js), lalu isi `whatsappNumber` dengan kode negara dan angka saja. Contoh, nomor `0812-3456-7890` ditulis sebagai `6281234567890`. Sesudah disimpan, tombol checkout akan membuka chat langsung ke nomor itu dengan daftar pesanan terisi.
+
+## Memasang logo di header
+
+Simpan logo di folder [images](./images/), lalu isi `headerLogo` di [shop-config.js](./shop-config.js), misalnya `headerLogo: "./images/logo-khadika.png"`. Logo horizontal dengan latar transparan paling cocok. Bila path kosong atau file logo belum ada, nama toko tetap muncul sebagai cadangan.

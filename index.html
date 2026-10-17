@@ -37,6 +37,9 @@
     .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
     .brand { display: inline-flex; align-items: center; gap: 10px; flex: none; }
     .brand-mark { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 50% 50% 45% 45%; background: var(--red); color: white; font-size: 22px; }
+    .brand-mark[hidden], .brand-name[hidden] { display: none; }
+    .brand-logo { display: block; width: auto; max-width: 170px; max-height: 48px; object-fit: contain; }
+    .brand-logo[hidden] { display: none; }
     .brand-name { font-family: Georgia, "Times New Roman", serif; font-size: 20px; line-height: 1; font-weight: 700; letter-spacing: -.04em; }
     .brand-name span { color: var(--red); }
     .brand-sub { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; font-weight: 650; letter-spacing: .16em; text-transform: uppercase; }
@@ -164,6 +167,7 @@
       .announcement { font-size: 10px; }
       .header-inner { min-height: 66px; }
       .brand-mark { width: 38px; height: 38px; font-size: 19px; }
+      .brand-logo { max-width: 145px; max-height: 42px; }
       .brand-name { font-size: 18px; }
       .nav { display: none; }
       .cart-button { min-height: 39px; padding: 0 9px; }
@@ -214,9 +218,10 @@
   <div class="announcement">Warung dekat rumah untuk kebutuhan sehari-hari · Belanja Hemat, Harga Bersahabat</div>
   <header class="header">
     <div class="wrap header-inner">
-      <a class="brand" href="#beranda" aria-label="Khadika Shop, halaman utama">
+      <a class="brand" href="#beranda" aria-label="Khadika Shop, halaman utama" data-header-brand>
         <span class="brand-mark" aria-hidden="true">✿</span>
-        <span><span class="brand-name">Khadika <span>Shop</span></span><span class="brand-sub">Kebutuhan harian keluarga</span></span>
+        <img class="brand-logo" data-header-logo alt="" hidden>
+        <span class="brand-copy"><span class="brand-name">Khadika <span>Shop</span></span><span class="brand-sub">Kebutuhan harian keluarga</span></span>
       </a>
       <nav class="nav" aria-label="Navigasi utama">
         <a href="#beranda">Beranda</a>
