@@ -32,16 +32,40 @@ window.WARUNG_PRODUCTS = [
     description: "Gula putih untuk minuman dan masakan."
   },
   {
+    id: "minyak",
+    name: "Minyak Tropical",
+    category: "sembako",
+    categoryLabel: "Sembako",
+    price: 22000,
+    unit: "1 Liter",
+    emoji: "🧂",
+    image: "./images/tropical1.webp",
+    badge: "Stok ada",
+    description: "Minyak goreng kelapa sawit berkualitas tinggi."
+  },
+  {
     id: "sabun-mandi",
-    name: "Sabun Cair Giv",
+    name: "Sabun Cair GIV",
     category: "perlengkapan-mandi",
     categoryLabel: "Perlengkapan Mandi",
     price: 23000,
     unit: "1 pouch",
     emoji: "🧼",
-    image: "./images/sabun-mandi.jpg",
+    image: "./images/giv800.jpg",
     badge: "Favorit",
     description: "Sabun cair dengan aroma segar untuk keluarga."
+  },
+  {
+    id: "shampoo-zinc",
+    name: "Shampoo Zinc",
+    category: "perlengkapan-mandi",
+    categoryLabel: "Perlengkapan Mandi",
+    price: 39000,
+    unit: "680 ml",
+    emoji: "🧼",
+    image: "./images/zinc680.jpg",
+    badge: "Favorit",
+    description: "Shampoo anti ketombe bandel dan perawatan rambut rontok."
   },
   {
     id: "sosoft",
@@ -51,32 +75,57 @@ window.WARUNG_PRODUCTS = [
     price: 8500,
     unit: "360 gram",
     emoji: "🫗",
-    image: "./images/sosoft.jpg",
+    image: "./images/sosoft360.jpg",
     badge: "",
-    description: "Minyak untuk stok dapur dan masak harian."
+    description: "Pilihan praktis untuk mencuci pakaian harian."
   },
   {
-    id: "mi-instan",
-    name: "Mi Instan",
+    id: "Kopi-KA",
+    name: "Kopi Kapal Api Sc",
     category: "makanan-minuman",
     categoryLabel: "Makanan & Minuman",
-    price: 3500,
-    unit: "1 bungkus",
+    price: 10000,
+    unit: "1 renceng",
     emoji: "🍜",
-    image: "",
+    image: "./images/kapalapisc.jpeg",
     badge: "",
     description: "Sajian praktis untuk teman santai di rumah."
   },
   {
     id: "deterjen-bubuk",
-    name: "Deterjen Bubuk",
+    name: "Deterjen DAIA",
     category: "perlengkapan-cuci",
     categoryLabel: "Perlengkapan Cuci",
-    price: 12000,
-    unit: "kemasan kecil",
-    emoji: "🫧",
-    image: "",
+    price: 25000,
+    unit: "kemasan besar 1.5kg",
+    emoji: "🧼",
+    image: "./images/daia150.jpg",
     badge: "",
     description: "Pilihan praktis untuk mencuci pakaian harian."
+  },
+  {
+    id: "deterjen-bubuk2",
+    name: "Deterjen Rinso",
+    category: "perlengkapan-cuci",
+    categoryLabel: "Perlengkapan Cuci",
+    price: 26000,
+    unit: "kemasan besar 1.44kg",
+    emoji: "🧼",
+    image: "./images/rinso144.jpg",
+    badge: "",
+    description: "Pilihan praktis untuk mencuci pakaian harian."
+  },
+  {
+    id: "wipol",
+    name: "Wipol Lantai",
+    category: "rumah-tangga",
+    categoryLabel: "Rumah Tangga",
+    price: 14000,
+    unit: "kemasan 720 gram",
+    emoji: "🧼",
+    image: "./images/wipol720.jpg",
+    badge: "",
+    description: "Pengharum pilihan untuk membersihkan lantai rumah Anda."
   }
+  
 ];

@@ -36,13 +36,16 @@
     .header { position: sticky; top: 0; z-index: 20; background: #f5efdfed; backdrop-filter: blur(14px); border-bottom: 1px solid #e8dec9a8; }
     .header-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
     .brand { display: inline-flex; align-items: center; gap: 10px; flex: none; }
+    .header .brand { flex-direction: column; align-items: flex-start; gap: 3px; }
+    .brand-main { display: inline-flex; align-items: center; justify-content: flex-start; gap: 10px; }
     .brand-mark { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 50% 50% 45% 45%; background: var(--red); color: white; font-size: 22px; }
     .brand-mark[hidden], .brand-name[hidden] { display: none; }
-    .brand-logo { display: block; width: auto; max-width: 170px; max-height: 48px; object-fit: contain; }
+    .brand-logo { display: block; width: auto; max-width: 240px; max-height: 100px; object-fit: contain; }
     .brand-logo[hidden] { display: none; }
     .brand-name { font-family: Georgia, "Times New Roman", serif; font-size: 20px; line-height: 1; font-weight: 700; letter-spacing: -.04em; }
     .brand-name span { color: var(--red); }
-    .brand-sub { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; font-weight: 650; letter-spacing: .16em; text-transform: uppercase; }
+    .brand-sub { display: block; margin-top: 1px; color: var(--muted); font-size: 12px; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; }
+    .header .brand-sub { margin-top: 0; text-align: left; }
     .nav { display: flex; align-items: center; gap: 25px; color: var(--muted); font-size: 13px; }
     .nav a:hover, .nav a:focus-visible { color: var(--red); }
     .header-actions { display: flex; align-items: center; gap: 9px; }
@@ -67,7 +70,7 @@
     .hero-art::after { width: 200px; height: 200px; border: 1px dashed #b5a98f; right: 24%; top: 23%; }
     .hero-basket { z-index: 1; position: relative; font-size: clamp(100px, 16vw, 175px); filter: drop-shadow(0 20px 12px #63543a36); transform: rotate(-8deg); }
     .hero-sticker { position: absolute; z-index: 2; bottom: 34px; right: 9%; padding: 12px 15px; border: 1px solid #e8dec9; border-radius: 9px; background: var(--surface); box-shadow: var(--shadow); color: var(--green); font-family: Georgia, serif; font-size: 14px; transform: rotate(3deg); }
-    .benefits { display: grid; grid-template-columns: repeat(3, 1fr); margin: 5px 0 44px; border: 1px solid var(--line); border-radius: 12px; background: #fffaf080; }
+    .benefits { display: grid; grid-template-columns: repeat(3, 1fr); margin: 5px auto 44px; border: 1px solid var(--line); border-radius: 12px; background: #fffaf080; }
     .benefit { display: flex; gap: 12px; align-items: center; padding: 17px 22px; }
     .benefit + .benefit { border-left: 1px solid var(--line); }
     .benefit-icon { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--green-pale); font-size: 17px; }
@@ -100,13 +103,13 @@
     .product { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); transition: transform .2s ease, box-shadow .2s ease; }
     .product[hidden] { display: none; }
     .product:hover { transform: translateY(-3px); box-shadow: 0 12px 30px #30271e12; }
-    .product-visual { height: 170px; position: relative; display: grid; place-items: center; overflow: hidden; background: #f0e7d3; }
+    .product-visual { height: auto; aspect-ratio: 4 / 3; position: relative; display: grid; place-items: center; overflow: hidden; background: #f0e7d3; }
     .product-visual::before { content: ""; position: absolute; width: 135px; height: 135px; border-radius: 50%; background: #fff8e9aa; }
     .product:nth-child(3n + 2) .product-visual { background: #e9eadf; }
     .product:nth-child(3n + 2) .product-visual::before { background: #f9fbefaa; }
     .product:nth-child(3n) .product-visual { background: #ede6e0; }
     .product:nth-child(3n) .product-visual::before { background: #fff7f0aa; }
-    .product-photo { position: relative; z-index: 1; width: 100%; height: 100%; padding: 14px; object-fit: contain; object-position: center; }
+    .product-photo { position: relative; z-index: 1; display: block; width: auto; height: auto; max-width: calc(100% - 24px); max-height: calc(100% - 24px); object-fit: contain; object-position: center; }
     .product-emoji { position: relative; z-index: 1; font-size: 74px; filter: drop-shadow(0 8px 5px #30271e1e); }
     .product-label { position: absolute; z-index: 2; top: 11px; left: 11px; border-radius: 4px; padding: 5px 7px; background: var(--green-pale); color: var(--green-dark); font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
     .product-content { display: flex; flex-direction: column; flex: 1; padding: 13px; }
@@ -120,7 +123,7 @@
     .add-button:hover { background: var(--green-dark); }
     .empty-results { display: none; grid-column: 1 / -1; padding: 42px 16px; color: var(--muted); text-align: center; }
     .empty-results.visible { display: block; }
-    .trust-band { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; margin: 0 0 65px; padding: 25px 30px; border-radius: 12px; background: var(--green); color: white; }
+    .trust-band { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; margin: 0 auto 65px; padding: 25px 30px; border-radius: 12px; background: var(--green); color: white; }
     .trust-band h2 { margin: 0 0 5px; font-family: Georgia, serif; font-size: 25px; font-weight: 500; }
     .trust-band p { margin: 0; color: #e3ead9; font-size: 12px; }
     .trust-band .button { background: #fffaf0; color: var(--green-dark); }
@@ -158,7 +161,7 @@
     @media (max-width: 900px) {
       .nav { gap: 15px; }
       .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .product-visual { height: 190px; }
+      .product-visual { aspect-ratio: 4 / 3; }
       .category { padding: 13px; gap: 9px; }
       .category-icon { width: 44px; height: 44px; }
     }
@@ -167,7 +170,7 @@
       .announcement { font-size: 10px; }
       .header-inner { min-height: 66px; }
       .brand-mark { width: 38px; height: 38px; font-size: 19px; }
-      .brand-logo { max-width: 145px; max-height: 42px; }
+      .brand-logo { max-width: 210px; max-height: 86px; }
       .brand-name { font-size: 18px; }
       .nav { display: none; }
       .cart-button { min-height: 39px; padding: 0 9px; }
@@ -197,7 +200,7 @@
       .filters { gap: 6px; }
       .filter { min-height: 34px; padding: 0 10px; }
       .products { gap: 9px; }
-      .product-visual { height: 132px; }
+      .product-visual { aspect-ratio: 4 / 3; }
       .product-emoji { font-size: 60px; }
       .product-content { padding: 10px; }
       .product h3 { font-size: 12px; }
@@ -215,13 +218,16 @@
   </style>
 </head>
 <body>
-  <div class="announcement">Warung dekat rumah untuk kebutuhan sehari-hari · Belanja Hemat, Harga Bersahabat</div>
+  <div class="announcement">Perumahan Duta bangsa Residence Blok D No. 15 (Ngeglik, Selokaton, Kec. Gondangrejo, Kabupaten Karanganyar, Jawa Tengah 57188)</div>
   <header class="header">
     <div class="wrap header-inner">
       <a class="brand" href="#beranda" aria-label="Khadika Shop, halaman utama" data-header-brand>
-        <span class="brand-mark" aria-hidden="true">✿</span>
-        <img class="brand-logo" data-header-logo alt="" hidden>
-        <span class="brand-copy"><span class="brand-name">Khadika <span>Shop</span></span><span class="brand-sub">Kebutuhan harian keluarga</span></span>
+        <span class="brand-main">
+          <span class="brand-mark" aria-hidden="true">✿</span>
+          <img class="brand-logo" data-header-logo alt="" hidden>
+          <span class="brand-name">Khadika <span>Shop</span></span>
+        </span>
+        <span class="brand-sub">Kebutuhan harian keluarga</span>
       </a>
       <nav class="nav" aria-label="Navigasi utama">
         <a href="#beranda">Beranda</a>
@@ -248,7 +254,7 @@
         </div>
         <div class="hero-art" aria-hidden="true">
           <span class="hero-basket">🛒</span>
-          <span class="hero-sticker">Belanja di<br>warung sendiri</span>
+          <span class="hero-sticker">Banyak pilihan produk<br>yang Anda butuhkan.</span>
         </div>
       </div>
     </section>
@@ -266,7 +272,7 @@
       <div class="categories">
         <button class="category" type="button" data-category-link="sembako"><span class="category-icon" aria-hidden="true">🌾</span><span><strong>Sembako</strong><small>Beras, gula, minyak</small></span></button>
         <button class="category" type="button" data-category-link="perlengkapan-mandi"><span class="category-icon" aria-hidden="true">🧼</span><span><strong>Perlengkapan Mandi</strong><small>Sabun, sampo, perawatan diri</small></span></button>
-        <button class="category" type="button" data-category-link="perlengkapan-cuci"><span class="category-icon" aria-hidden="true">🫧</span><span><strong>Perlengkapan Cuci</strong><small>Deterjen, pewangi, pemutih</small></span></button>
+        <button class="category" type="button" data-category-link="perlengkapan-cuci"><span class="category-icon" aria-hidden="true">🧼</span><span><strong>Perlengkapan Cuci</strong><small>Deterjen, pewangi, pemutih</small></span></button>
         <button class="category" type="button" data-category-link="rumah-tangga"><span class="category-icon" aria-hidden="true">🧹</span><span><strong>Rumah Tangga</strong><small>Keperluan rumah sehari-hari</small></span></button>
         <button class="category" type="button" data-category-link="makanan-minuman"><span class="category-icon" aria-hidden="true">🍜</span><span><strong>Makanan & Minuman</strong><small>Mi, camilan, minuman</small></span></button>
         <button class="category" type="button" data-category-link="lain-lain"><span class="category-icon" aria-hidden="true">🧺</span><span><strong>Lain-lain</strong><small>Produk pilihan lainnya</small></span></button>
@@ -304,7 +310,7 @@
   <footer class="footer">
     <div class="wrap">
       <div class="footer-inner">
-        <div><a class="brand" href="#beranda"><span class="brand-mark" aria-hidden="true">✿</span><span><span class="brand-name">Khadika <span>Shop</span></span><span class="brand-sub">Kebutuhan harian keluarga</span></span></a><p>Warung tetangga untuk kebutuhan rumah sehari-hari.</p></div>
+        <div><a class="brand" href="#beranda"><span class="brand-mark" aria-hidden="true">✿</span><span><span class="brand-name">Khadika <span>Shop</span></span><span class="brand-sub">Kebutuhan harian keluarga</span></span></a><p>Perumahan Duta Bangsa Residence Blok D No. 15.</p></div>
         <div class="footer-meta"><strong>Info warung</strong><p>Tanyakan jam buka dan ketersediaan barang.</p></div>
       </div>
       <div class="footer-note">Harga pada katalog ini dapat berubah sewaktu-waktu. © <span data-year></span> Khadika Shop.</div>
