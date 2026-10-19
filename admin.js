@@ -107,7 +107,98 @@
   function parseProductFile(source) {
     const match = source.match(/window\.WARUNG_PRODUCTS\s*=\s*([\s\S]*);\s*$/);
     if (!match) throw new Error("Format products.js belum dikenali. Produk tidak diubah.");
-    const result = JSON.parse(match[1]);
+    const text = match[1];
+    let cursor = 0;
+
+    function skipSpace() {
+      while (cursor < text.length) {
+        if (/\s/.test(text[cursor])) { cursor += 1; continue; }
+        if (text[cursor] === "/" && text[cursor + 1] === "/") {
+          cursor += 2;
+          while (cursor < text.length && text[cursor] !== "\n") cursor += 1;
+          continue;
+        }
+        if (text[cursor] === "/" && text[cursor + 1] === "*") {
+          const end = text.indexOf("*/", cursor + 2);
+          if (end < 0) throw new Error("Komentar di products.js belum ditutup.");
+          cursor = end + 2;
+          continue;
+        }
+        break;
+      }
+    }
+
+    function readString() {
+      const start = cursor;
+      cursor += 1;
+      while (cursor < text.length) {
+        if (text[cursor] === "\\") { cursor += 2; continue; }
+        if (text[cursor] === '"') {
+          cursor += 1;
+          return JSON.parse(text.slice(start, cursor));
+        }
+        cursor += 1;
+      }
+      throw new Error("Teks produk di products.js belum ditutup dengan benar.");
+    }
+
+    function readKey() {
+      skipSpace();
+      if (text[cursor] === '"') return readString();
+      const match = text.slice(cursor).match(/^[A-Za-z_$][\w$]*/);
+      if (!match) throw new Error(`Nama properti products.js tidak valid di posisi ${cursor}.`);
+      cursor += match[0].length;
+      return match[0];
+    }
+
+    function readValue() {
+      skipSpace();
+      const character = text[cursor];
+      if (character === '"') return readString();
+      if (character === "[") {
+        cursor += 1;
+        const items = [];
+        skipSpace();
+        while (text[cursor] !== "]") {
+          if (cursor >= text.length) throw new Error("Daftar produk di products.js belum ditutup.");
+          items.push(readValue());
+          skipSpace();
+          if (text[cursor] === ",") { cursor += 1; skipSpace(); if (text[cursor] === "]") break; }
+          else if (text[cursor] !== "]") throw new Error(`Pemisah item products.js tidak valid di posisi ${cursor}.`);
+        }
+        cursor += 1;
+        return items;
+      }
+      if (character === "{") {
+        cursor += 1;
+        const object = Object.create(null);
+        skipSpace();
+        while (text[cursor] !== "}") {
+          if (cursor >= text.length) throw new Error("Data produk di products.js belum ditutup.");
+          const key = readKey();
+          skipSpace();
+          if (text[cursor] !== ":") throw new Error(`Tanda titik dua tidak ditemukan setelah ${key}.`);
+          cursor += 1;
+          object[key] = readValue();
+          skipSpace();
+          if (text[cursor] === ",") { cursor += 1; skipSpace(); if (text[cursor] === "}") break; }
+          else if (text[cursor] !== "}") throw new Error(`Pemisah properti products.js tidak valid di posisi ${cursor}.`);
+        }
+        cursor += 1;
+        return object;
+      }
+      const number = text.slice(cursor).match(/^-?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?/);
+      if (number) { cursor += number[0].length; return Number(number[0]); }
+      const word = text.slice(cursor).match(/^[A-Za-z_$][\w$]*/)?.[0];
+      if (word === "true") { cursor += word.length; return true; }
+      if (word === "false") { cursor += word.length; return false; }
+      if (word === "null") { cursor += word.length; return null; }
+      throw new Error(`Nilai products.js tidak dikenali di posisi ${cursor}.`);
+    }
+
+    const result = readValue();
+    skipSpace();
+    if (cursor !== text.length) throw new Error(`Ada data tambahan yang tidak dikenali di products.js pada posisi ${cursor}.`);
     if (!Array.isArray(result)) throw new Error("Daftar produk di repositori bukan array yang valid.");
     return result;
   }
