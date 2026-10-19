@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f5efdf">
+  <title>Kelola Produk — Khadika Shop</title>
+  <style>
+    :root { color-scheme: light; --ink:#30271e; --muted:#746956; --paper:#f5efdf; --surface:#fffaf0; --line:#e8dec9; --green:#63734c; --green-dark:#4e6038; --red:#b7472f; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ink); background:var(--paper); }
+    * { box-sizing:border-box; }
+    body { margin:0; min-width:320px; }
+    button,input,select,textarea { font:inherit; }
+    button { cursor:pointer; }
+    .top { position:sticky;top:0;z-index:2;background:#f5efdfed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line); }
+    .top-inner,.wrap { width:min(1040px,calc(100% - 32px));margin:auto; }
+    .top-inner { min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px; }
+    .brand { font-family:Georgia,serif;font-size:21px;font-weight:700; }
+    .brand small { display:block;margin-top:3px;font:700 10px/1.3 system-ui,sans-serif;color:var(--muted);letter-spacing:.12em;text-transform:uppercase; }
+    a { color:var(--green-dark);font-size:13px;font-weight:700;text-decoration:none; }
+    main { padding:28px 0 60px; }
+    h1 { margin:0 0 6px;font:600 clamp(28px,5vw,38px)/1.1 Georgia,serif;letter-spacing:-.03em; }
+    h2 { margin:0 0 14px;font:600 23px/1.2 Georgia,serif; }
+    p { color:var(--muted);line-height:1.5; }
+    .intro { margin:0 0 22px; }
+    .panel { padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:0 10px 30px #30271e0b; }
+    .setup { margin-bottom:20px; }
+    .setup-grid,.form-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px; }
+    label { display:grid;gap:6px;font-size:12px;font-weight:750; }
+    input,select,textarea { width:100%;min-height:43px;padding:10px 11px;border:1px solid var(--line);border-radius:8px;background:#fffdf8;color:var(--ink); }
+    textarea { min-height:80px;resize:vertical; }
+    input:focus,select:focus,textarea:focus,button:focus-visible { outline:3px solid #63734c55;outline-offset:2px; }
+    .wide { grid-column:1/-1; }
+    .help { margin:12px 0 0;font-size:12px; }
+    .actions { display:flex;flex-wrap:wrap;gap:9px;margin-top:14px; }
+    .btn { min-height:42px;padding:0 15px;border:1px solid var(--line);border-radius:8px;background:#fffdf8;color:var(--ink);font-weight:750; }
+    .btn-primary { border-color:var(--green);background:var(--green);color:white; }
+    .btn-primary:hover { background:var(--green-dark); }
+    .btn-danger { color:#9d3324; }
+    .status { min-height:22px;margin:10px 0 0;font-size:13px;font-weight:650; }
+    .status[data-type="error"] { color:#a82e23; }
+    .status[data-type="success"] { color:var(--green-dark); }
+    .toolbar { display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 12px; }
+    .toolbar h2 { margin:0; }
+    .product-list { display:grid;gap:10px; }
+    .product-row { display:grid;grid-template-columns:68px minmax(0,1fr) auto;align-items:center;gap:13px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface); }
+    .thumb { width:68px;height:68px;display:grid;place-items:center;overflow:hidden;border-radius:9px;background:#e9e9dc;font-size:30px; }
+    .thumb img { width:100%;height:100%;object-fit:contain; }
+    .product-row h3 { margin:0 0 4px;font-size:15px; }
+    .product-row p { margin:0;font-size:12px; }
+    .row-actions { display:flex;align-items:center;gap:7px; }
+    .row-actions .btn { min-height:37px;padding:0 11px;font-size:12px; }
+    .badge { display:inline-block;margin-left:6px;padding:3px 7px;border-radius:20px;background:#ece7d9;color:var(--muted);font-size:10px;font-weight:750;vertical-align:2px; }
+    .empty { padding:24px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted); }
+    .editor { margin:18px 0;scroll-margin-top:84px; }
+    .editor-head { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px; }
+    .editor-head h2 { margin:0; }
+    .image-control { display:flex;align-items:center;gap:12px; }
+    .image-preview { width:74px;height:74px;display:grid;place-items:center;overflow:hidden;border-radius:10px;background:#e9e9dc;font-size:32px; }
+    .image-preview img { width:100%;height:100%;object-fit:contain; }
+    .token-row { display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:10px;margin-top:13px; }
+    .hidden { display:none!important; }
+    @media(max-width:650px) { .setup-grid,.form-grid { grid-template-columns:1fr; }.wide { grid-column:auto; }.panel { padding:16px; }.product-row { grid-template-columns:56px minmax(0,1fr);gap:10px; }.thumb { width:56px;height:56px; }.row-actions { grid-column:2; }.toolbar { align-items:flex-start; }.token-row { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top-inner"><div class="brand">Khadika Shop<small>Kelola katalog produk</small></div><a href="./index.html">← Lihat katalog</a></div></header>
+  <main class="wrap">
+    <h1>Produk toko</h1>
+    <p class="intro">Tambah barang, perbarui harga dan foto, atau sembunyikan barang yang sedang tidak tersedia.</p>
+
+    <section class="panel setup" aria-labelledby="setup-title">
+      <h2 id="setup-title">Hubungkan ke GitHub</h2>
+      <div class="setup-grid">
+        <label>Nama pemilik repositori<input data-owner autocomplete="off" value="overtune04-star"></label>
+        <label>Nama repositori<input data-repo autocomplete="off" value="Khadika-Shop"></label>
+        <label>Cabang<input data-branch autocomplete="off" value="main"></label>
+        <label>Lokasi file produk<input data-product-path autocomplete="off" value="products.js"></label>
+        <label class="wide">Lokasi folder foto di repositori<input data-image-path autocomplete="off" value="images"></label>
+      </div>
+      <p class="help">Pengaturan repositori disimpan hanya di perangkat ini. Token GitHub disimpan sementara selama tab ini terbuka. Token harus memiliki izin <b>Contents: read and write</b> untuk repositori katalog.</p>
+      <div class="token-row">
+        <label>Token GitHub<input data-token type="password" autocomplete="off" placeholder="github_pat_…"></label>
+        <button class="btn btn-primary" type="button" data-connect>Hubungkan & muat produk</button>
+      </div>
+      <p class="status" data-status role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel editor hidden" data-editor aria-labelledby="editor-title">
+      <div class="editor-head"><h2 id="editor-title">Tambah produk</h2><button class="btn" type="button" data-cancel>Batalkan</button></div>
+      <form data-product-form>
+        <div class="form-grid">
+          <label>Nama produk<input name="name" required maxlength="80" placeholder="Contoh: Beras Ramos"></label>
+          <label>Kategori<select name="category" required><option value="sembako">Sembako</option><option value="perlengkapan-mandi">Perlengkapan Mandi</option><option value="perlengkapan-cuci">Perlengkapan Cuci</option><option value="rumah-tangga">Rumah Tangga</option><option value="makanan-minuman">Makanan & Minuman</option><option value="lain-lain">Lain-lain</option></select></label>
+          <label>Harga (Rp)<input name="price" type="number" min="0" step="500" required placeholder="15000"></label>
+          <label>Satuan / ukuran<input name="unit" required maxlength="40" placeholder="1 kg"></label>
+          <label>Label singkat (opsional)<input name="badge" maxlength="30" placeholder="Favorit, Stok ada"></label>
+          <label>Emoji cadangan<input name="emoji" maxlength="8" value="🛍️"></label>
+          <label class="wide">Keterangan<input name="description" required maxlength="180" placeholder="Keterangan singkat produk"></label>
+          <div class="wide image-control"><div class="image-preview" data-preview>🛍️</div><label>Foto produk (opsional)<input name="imageFile" type="file" accept="image/*"><span class="help">Foto akan diperkecil otomatis. Foto lama tetap dipakai jika tidak memilih foto baru.</span></label></div>
+        </div>
+        <div class="actions"><button class="btn btn-primary" type="submit" data-save-product>Simpan produk ke GitHub</button><button class="btn btn-danger hidden" type="button" data-delete>Hapus produk</button></div>
+      </form>
+    </section>
+
+    <div class="toolbar"><h2>Daftar produk <span data-count></span></h2><button class="btn btn-primary" type="button" data-add>＋ Tambah produk</button></div>
+    <section class="product-list" data-list aria-live="polite"><div class="empty">Hubungkan GitHub untuk memuat produk toko.</div></section>
+  </main>
+  <script src="./admin.js?v=20261019"></script>
+</body>
+</html>

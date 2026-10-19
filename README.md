@@ -2,29 +2,13 @@
 
 ## Mengelola produk
 
-Edit daftar di [products.js](./products.js). Setiap produk berisi nama, kategori, harga, satuan, emoji cadangan, foto opsional, label, dan deskripsi. Setelah disimpan, muat ulang halaman katalog.
+Kelola produk lewat [admin.html](./admin.html). Halaman ini dapat menambahkan, mengedit, menyembunyikan, dan mengganti foto produk. Saat tombol Simpan ditekan, perubahan dikirim sebagai commit ke repositori GitHub sehingga tidak perlu mengedit kode atau mengunggah file secara manual.
 
-```js
-{
-  id: "sabun-cair",
-  name: "Sabun Cair",
-  category: "perlengkapan-mandi",
-  categoryLabel: "Perlengkapan Mandi",
-  price: 12000,
-  unit: "250 ml",
-  emoji: "🧴",
-  image: "./images/sabun-cair.webp",
-  badge: "",
-  description: "Sabun cair untuk kebutuhan mandi harian."
-}
-```
+Saat pertama kali dipakai, isi pemilik repositori, nama repositori, cabang, lokasi `products.js`, dan lokasi folder gambar. Masukkan fine-grained personal access token GitHub dengan akses **Contents: read and write** untuk repositori tersebut. Token hanya disimpan sementara pada tab browser dan tidak ditulis ke website. Jangan bagikan token kepada orang lain.
 
-- `id` harus unik dan ditulis dengan huruf kecil serta tanda hubung.
-- `price` gunakan angka saja, tanpa `Rp` atau tanda pemisah ribuan.
-- `badge` bisa dikosongkan (`""`) jika produk tidak memakai label.
-- Simpan foto di folder [images](./images/), lalu isi `image` dengan path seperti `./images/sabun-cair.webp`. Kosongkan `image` untuk memakai emoji sebagai pengganti.
-- Foto persegi sekitar **1000 × 1000 piksel** disarankan. Gunakan WebP atau JPG yang dikompres; foto akan diskalakan otomatis di desktop dan HP tanpa memotong kemasan.
-- Kode kategori yang tersedia: `sembako`, `perlengkapan-mandi`, `perlengkapan-cuci`, `rumah-tangga`, `makanan-minuman`, dan `lain-lain`.
+Untuk menyembunyikan produk sementara, gunakan tombol **Sembunyikan** di daftar produk. Produk dan fotonya tetap tersimpan; gunakan **Tampilkan** untuk memasukkannya kembali ke katalog. Jika nama produk digunakan kembali setelah disembunyikan, edit produk tersembunyi tersebut agar foto dan informasi sebelumnya tetap tersimpan.
+
+Form admin menyediakan kategori Sembako, Perlengkapan Mandi, Perlengkapan Cuci, Rumah Tangga, Makanan & Minuman, dan Lain-lain. Foto akan diperkecil otomatis sebelum disimpan. Untuk mengubah perilaku katalog atau keranjang, edit [app.js](./app.js). Untuk mengubah tampilan, edit bagian `<style>` di [index.html](./index.html).
 - Untuk mengubah perilaku katalog atau keranjang, edit [app.js](./app.js). Untuk mengubah tampilan, edit bagian `<style>` di [index.html](./index.html).
 
 ## Mengatur WhatsApp toko

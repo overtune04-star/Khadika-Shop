@@ -87,7 +87,7 @@
   }
 
   function renderProducts() {
-    productData.forEach(product => {
+    productData.filter(product => product.visible !== false).forEach(product => {
       const card = makeProductCard(product);
       productCards.set(product.id, { product, element: card });
       productGrid.insertBefore(card, emptyResults);
