@@ -8,12 +8,12 @@
     "lain-lain": "Lain-lain"
   };
   const $ = selector => document.querySelector(selector);
-  const settingsFields = {
-    owner: $(`[data-owner]`),
-    repo: $(`[data-repo]`),
-    branch: $(`[data-branch]`),
-    productPath: $(`[data-product-path]`),
-    imagePath: $(`[data-image-path]`)
+  const repository = {
+    owner: "overtune04-star",
+    repo: "Khadika-Shop",
+    branch: "main",
+    productPath: "products.js",
+    imagePath: "images"
   };
   const tokenInput = $(`[data-token]`);
   const status = $(`[data-status]`);
@@ -29,49 +29,30 @@
   let isConnected = false;
 
   try {
-    const saved = JSON.parse(localStorage.getItem("khadikaAdminSettings") || "{}");
-    Object.entries(settingsFields).forEach(([key, field]) => {
-      if (saved[key]) field.value = saved[key];
-    });
     tokenInput.value = sessionStorage.getItem("khadikaAdminToken") || "";
-  } catch { /* Jika penyimpanan browser tidak tersedia, pengaturan tetap dapat diisi manual. */ }
+  } catch { /* Jika penyimpanan browser tidak tersedia, token tetap dapat diisi manual. */ }
 
   function setStatus(message, type = "") {
     status.textContent = message;
     status.dataset.type = type;
   }
 
-  function getSettings() {
-    return Object.fromEntries(Object.entries(settingsFields).map(([key, field]) => [key, field.value.trim().replace(/^\/+|\/+$/g, "")]));
-  }
-
   function validateSettings() {
-    const settings = getSettings();
     const token = tokenInput.value.trim();
-    if (!settings.owner || !settings.repo || !settings.branch || !settings.productPath || !settings.imagePath || !token) {
-      throw new Error("Lengkapi semua pengaturan repositori dan token GitHub terlebih dahulu.");
-    }
-    if (settings.productPath.startsWith(".") || settings.imagePath.startsWith(".")) {
-      throw new Error("Lokasi file dan foto harus berupa path repositori, misalnya outputs/warung-bu-rina/products.js.");
-    }
-    return { ...settings, token };
+    if (!token) throw new Error("Masukkan token GitHub terlebih dahulu.");
+    return { ...repository, token };
   }
 
   function rememberSettings(settings) {
     try {
-      localStorage.setItem("khadikaAdminSettings", JSON.stringify({
-        owner: settings.owner, repo: settings.repo, branch: settings.branch,
-        productPath: settings.productPath, imagePath: settings.imagePath
-      }));
       sessionStorage.setItem("khadikaAdminToken", settings.token);
     } catch { /* Browser boleh menolak penyimpanan; nilai input tetap tersedia selama halaman terbuka. */ }
   }
 
   function apiUrl(path, branch = false) {
-    const settings = getSettings();
     const encodedPath = path.split("/").map(encodeURIComponent).join("/");
-    const url = new URL(`https://api.github.com/repos/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}/contents/${encodedPath}`);
-    if (branch) url.searchParams.set("ref", settings.branch);
+    const url = new URL(`https://api.github.com/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}/contents/${encodedPath}`);
+    if (branch) url.searchParams.set("ref", repository.branch);
     return url;
   }
 

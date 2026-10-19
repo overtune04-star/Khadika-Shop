@@ -71,16 +71,9 @@
 
     <section class="panel setup" aria-labelledby="setup-title">
       <h2 id="setup-title">Hubungkan ke GitHub</h2>
-      <div class="setup-grid">
-        <label>Nama pemilik repositori<input data-owner autocomplete="off" value="overtune04-star"></label>
-        <label>Nama repositori<input data-repo autocomplete="off" value="Khadika-Shop"></label>
-        <label>Cabang<input data-branch autocomplete="off" value="main"></label>
-        <label>Lokasi file produk<input data-product-path autocomplete="off" value="products.js"></label>
-        <label class="wide">Lokasi folder foto di repositori<input data-image-path autocomplete="off" value="images"></label>
-      </div>
-      <p class="help">Pengaturan repositori disimpan hanya di perangkat ini. Token GitHub disimpan sementara selama tab ini terbuka. Token harus memiliki izin <b>Contents: read and write</b> untuk repositori katalog.</p>
+      <p class="help">Masukkan token GitHub untuk repositori Khadika Shop. Token hanya disimpan sementara selama tab ini terbuka.</p>
       <div class="token-row">
-        <label>Token GitHub<input data-token type="password" autocomplete="off" placeholder="github_pat_…"></label>
+        <label>Token GitHub<input data-token type="password" autocomplete="off" placeholder="Tempel token GitHub di sini"></label>
         <button class="btn btn-primary" type="button" data-connect>Hubungkan & muat produk</button>
       </div>
       <p class="status" data-status role="status" aria-live="polite"></p>
@@ -106,6 +99,6 @@
     <div class="toolbar"><h2>Daftar produk <span data-count></span></h2><button class="btn btn-primary" type="button" data-add>＋ Tambah produk</button></div>
     <section class="product-list" data-list aria-live="polite"><div class="empty">Hubungkan GitHub untuk memuat produk toko.</div></section>
   </main>
-  <script src="./admin.js?v=20261019-parser2"></script>
+  <script src="./admin.js?v=20261019-token-only"></script>
 </body>
 </html>
